@@ -1,0 +1,23 @@
+*{margin:0px; padding:0px; box-sizing: border-box;}
+.container{max-width:1170px;margin:auto;width:auto;padding:0px 15px;}
+a,a:hover,a:visited,a:active,a:focus{text-decoration: none;color:#060606;}
+img{max-width: 100%;}
+ul li{list-style:none;}
+body{font-family: 'Heebo', sans-serif;
+}
+
+/* profile */
+#profile{padding:30px;}
+#profile .grey{background-color: #c9c9c9;border-radius: 50%;height: 140px;width: 140px;overflow: hidden;}
+
+
+
+    /* highlights */
+    #highlights{padding:30px;margin-top: 30px;}
+    #highlights .images{background-color: #ebebeb;border-radius: 50%;height: 105px;width: 105px;display: block;margin: auto;border: 1px solid #070707a8;-webkit-border-radius: 50px;
+        -moz-border-radius: 50px;padding: 10px;}
+     #highlights .name{text-align: center;margin-top: 10px;}
+
+     /* posts */
+     #posts{padding: 30px;margin-top: 20px;}
+     #posts .card{background-color: #ebebeb;border-radius: 0px;}

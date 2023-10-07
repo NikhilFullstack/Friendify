@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  overflow-x: hidden;
+}
+.spinner {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .spinner:after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 32px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-hourglass 1.2s infinite;
+  }
+  @keyframes spinner {
+    0% {
+      transform: rotate(0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+      transform: rotate(900deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+      transform: rotate(1800deg);
+    }
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+  .fontLogo{
+    font-family: 'Dancing Script', cursive;
+  }
+  .magic{
+    scale: 0;
+  }
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+.break-inside {
+  -moz-column-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+}
+.homepage{
+  background: rgb(125,64,149);
+background: linear-gradient(0deg, rgba(125,64,149,0.9500175070028011) 42%, rgba(62,124,96,1) 100%, rgba(109,43,142,0.8855917366946778) 100%);
+}
+.background{
+  background: rgb(64,100,149);
+background: radial-gradient(circle, rgba(64,100,149,0.9500175070028011) 64%, rgba(85,184,191,0) 81%, rgba(109,43,142,0.8855917366946778) 100%);
+}
+.scrollnone{
+  overflow: auto; /* Set to "auto" to enable scrolling when content overflows */
+  scrollbar-width: none; /* Hide the scrollbar for Firefox */
+}
+.scrollnone::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+.scrollnone::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+}
+.inherit{
+  width: inherit;
+  height: inherit;
+}
+
+/*  */
