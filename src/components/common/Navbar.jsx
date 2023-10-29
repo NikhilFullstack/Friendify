@@ -1,12 +1,10 @@
 
 import { useState, useEffect } from "react"
-import { BsChevronDown, BsFillHeartFill } from "react-icons/bs"
-import { AiOutlineMenu, AiFillHome } from "react-icons/ai"
+import {  BsFillHeartFill } from "react-icons/bs"
+import {  AiFillHome } from "react-icons/ai"
 import { ImSearch } from "react-icons/im";
 import { MdOutlineTravelExplore } from "react-icons/md"
 import { IoAddCircleSharp } from 'react-icons/io5'
-import { CgDetailsMore } from 'react-icons/cg'
-import { VscColorMode } from 'react-icons/vsc'
 import { FiLogOut } from 'react-icons/fi'
 import { BiUserCircle } from 'react-icons/bi'
 
@@ -14,30 +12,27 @@ import { BiUserCircle } from 'react-icons/bi'
 import { useDispatch, useSelector } from "react-redux"
 
 
-import { Link, matchPath, useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 import { searchUser } from "../../services/operations/profileAPI"
 import { logout } from "../../services/operations/authAPI"
 import { setSearchData } from "../../slices/searchSlice";
 import logo from '../../assets/logo/1f.png';
-import { Timeline } from "gsap/gsap-core";
 import { gsap, Power3 } from "gsap/gsap-core";
 import { CSSPlugin } from "gsap";
 import { useRef } from "react";
 
 function Navbar(props) {
+  const id = localStorage.getItem("id").split('"')[1];
   const { text } = props;
   const [showSearch, setShowSearch] = useState(false);
   const location = useLocation()
   const navigate = useNavigate();
-  const [more, showMore] = useState(false)
 
   const dispatch = useDispatch();
   const [search, setSearch] = useState(null);
   const [data, setData] = useState({ "search": '', });
-  const matchRoute = (route) => {
-    return matchPath({ path: route }, location.pathname)
-  }
+  
 
   function changeHandler(e) {
     setData((pre) => ({
@@ -70,7 +65,6 @@ function Navbar(props) {
   const { token } = useSelector((state) => state.auth);
 
   var logoitem = useRef(null);
-  var mainlogo = useRef(null);
   useEffect(() => {
     gsap.registerPlugin(CSSPlugin);
     gsap.to(logoitem, { x: -25, duration: 2, ease: Power3.easeInOut, repeat:-1, delay:.5, yoyo:true});
@@ -80,7 +74,7 @@ function Navbar(props) {
 
   return (
     <div
-      className={`${text == 'white' ? "text-white" : ''} hidden justi xl:flex xl:flex-col h-fit pl-8 py-5 w-fit md:w-72 fixed z-20 lg:border-r-2 xl:border-gray-600 gap-6`}
+      className={`${text === 'white' ? "text-white" : ''} hidden justi xl:flex xl:flex-col h-fit pl-8 py-5 w-fit md:w-72 fixed z-20 lg:border-r-2 xl:border-gray-600 gap-6`}
     >
       <>
         <Link to='/'>
@@ -123,7 +117,7 @@ function Navbar(props) {
       </>
 
       <>
-        <Link to='/createPost'>
+        <Link to='/'>
           <div className={`flex text-base gap-3 mb-1 text-white`}><IoAddCircleSharp className="text-2xl" /> Create</div>
         </Link>
       </>
@@ -135,7 +129,7 @@ function Navbar(props) {
       </>
 
       <>
-        <Link to='/dashboard/my-profile'>
+        <Link to={`/profile/${id}`}>
           <div className={`flex text-base gap-3 mb-1 text-white`}><BiUserCircle className="text-2xl" />Profile { }</div>
         </Link>
       </>

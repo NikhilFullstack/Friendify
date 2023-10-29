@@ -1,9 +1,6 @@
 import { toast } from "react-hot-toast"
 
 import { setLoading, setSignupData, setToken } from "../../slices/authSlice"
-// import { resetCart } from "../../slices/cartSlice"
-// import { setUser } from "../../slices/profileSlice"
-
 import { apiConnector } from "../apiconnector"
 import { endpoints } from "../apis"
 
@@ -103,8 +100,6 @@ export function authz(token){
         if (!response?.data?.success) {
           throw new Error("Login Time Up Signin Again")
         }
-        // result = response?.data
-        // dispatch(setFeed(result));
       } catch (error) {
         console.log("Authz user Api error............", error)
         toast.error(error.message)
@@ -112,7 +107,6 @@ export function authz(token){
       }
   
       toast.dismiss(toastId)
-      // dispatch(setFeedLoading(false))
       return result;
     }
   }
@@ -158,8 +152,6 @@ export function logout(navigate) {
   return async (dispatch) => {
     await dispatch(setLoading(true));
     await dispatch(setToken(null))
-    // dispatch(setUser(null))
-    // dispatch(resetCart())
     await localStorage.removeItem("token")
     await localStorage.removeItem("image")
     await localStorage.removeItem("firstName")

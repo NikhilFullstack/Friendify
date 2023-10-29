@@ -1,6 +1,6 @@
 
 
-        import { useState } from "react"
+        import { useState,lazy,Suspense } from "react"
         import { toast } from "react-hot-toast"
         import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
         import {SiGnuprivacyguard} from "react-icons/si"
@@ -10,16 +10,13 @@
         
         import { sendOtp } from "../../services/operations/authAPI"
         import { setSignupData } from "../../slices/authSlice"
-        
-        // import { ACCOUNT_TYPE } from "../../../utils/constants"
-        // import Tab from "../../common/Tab"
-        
+        import illustrator from '../../assets/images/illustration.png'
+    
+        const ImageHandler = lazy(() => import('../common/ImageHandler'));
         function SignupForm() {
           const navigate = useNavigate()
           const dispatch = useDispatch()
-        
-          // student or instructor
-          // const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
+
         
           const [formData, setFormData] = useState({
             firstName: "",
@@ -55,13 +52,9 @@
               ...formData,
             }
         
-            // Setting signup data to state
-            // To be used after otp verification
             dispatch(setSignupData(signupData))
-            // Send OTP to user for verification
             dispatch(sendOtp(formData.email, navigate))
         
-            // Reset
             setFormData({
               firstName: "",
               lastName: "",
@@ -70,18 +63,31 @@
               confirmPassword: "",
               contactNumber: '',
             })
-            // setAccountType(ACCOUNT_TYPE.STUDENT)
           }
         
           
         
           return (
-            <div className=" lg:p-8 w-[85vw] ml-16 mt-4 md:min-w-[35%] text-sm
+            <div className="h-screen lg:p-8 w-[85vw] ml-16 mt-4 md:min-w-[35%] text-sm
             translate-x-[-2rem] z-10 ">
-              {/* Tab */}
-              {/* <Tab tabData={tabData} field={accountType} setField={setAccountType} /> */}
-              {/* Form */}
-              <form onSubmit={handleOnSubmit} className="flex w-fit flex-col gap-y-4 border-2 p-4 rounded-lg border-white shadow-lg shadow-white">
+              <Suspense fallback={<div className="spinner"></div>}>
+                <ImageHandler Src={illustrator} ClassName={'bg-no-repeat hidden lg:block z-[-10] fixed h-max w-[50%] right-0 bottom-[15%] xl:top-0'} />
+              </Suspense>
+              <div>
+              <h1 className='text-3xl border-b-2 border-gray-100 border-dashed p-4 text-white'>
+                <span className='animate-bounce'>F</span>
+                <span className='animate-pulse'>r</span>
+                <span className='animate-pulse'>i</span>
+                <span className='animate-pulse'>e</span>
+                <span className='animate-pulse'>n</span>
+                <span className='animate-pulse'>d</span>
+                <span className='animate-pulse'>i</span>
+                <span className='animate-pulse'>f</span>
+                <span className='animate-pulse'>y</span>
+              </h1>
+              <br/>
+              </div>
+              <form onSubmit={handleOnSubmit} className="flex w-fit flex-col gap-y-4 p-4">
                 <div className="flex gap-x-4">
                   <label>
                     <p className="mb-1 text-[0.875rem] leading-[1.375rem] lg:hover:scale-95 text-gray-50">
@@ -215,7 +221,7 @@
                   Create Account
                 </button>
               </form>
-              <div className="mt-2 text-white flex lg:gap-x-52">Already registered? 
+              <div className="mt-2 text-white flex lg:gap-x-52">Already registered -->
               <Link to='/login' className="flex lg:hover:scale-95 font-semibold hover:text-green-600 border-2 lg:border-0 rounded-lg lg:px-12 lg:rounded-lg p-1 lg:p-0 border-yellow-400 lg:border-none hover:font-semibold gap-2 text-white" ><span className="text-white">Login</span> <SiGnuprivacyguard className="translate-y-1"/> </Link></div>
 
             </div>

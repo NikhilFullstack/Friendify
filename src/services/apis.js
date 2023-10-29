@@ -1,4 +1,4 @@
-const BASE_URL = "https://friendify-x10t.onrender.com"
+const BASE_URL = "http://localhost:4000"
 
 // AUTH ENDPOINTS
 export const endpoints = {
@@ -24,6 +24,7 @@ export const profileEndpoints = {
 export const postEndpoints = {
   CREATE_POST_API: BASE_URL + "/api/v1/post/createPost",
   GET_ALL_POST_API: BASE_URL + "/api/v1/post/getAllPost",
+  GET_SINGLE_POST_API: BASE_URL + "/api/v1/post/getSinglePost",
   UPDATE_POST_API: BASE_URL + "/api/v1/post/updatePost",
   DELETE_POST_API: BASE_URL + "/api/v1/post/deletePost",
   LIKE_POST_API: BASE_URL + "/api/v1/post/likePost",

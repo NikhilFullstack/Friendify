@@ -4,10 +4,8 @@ import { apiConnector } from "../apiconnector"
 import { postEndpoints } from "../apis"
 import { setFeed, setFeedLoading } from "../../slices/feedSlice"
 import { profileEndpoints } from "../apis"
-import { async } from "q"
-import { logout } from "./authAPI"
-
 const { CREATE_POST_API,
+  GET_SINGLE_POST_API,
   GET_ALL_POST_API,
   UPDATE_POST_API,
   DELETE_POST_API,
@@ -70,6 +68,40 @@ return async (dispatch) => {
     return result;
   }
 }
+
+
+export function getSinglePost(token,id){
+  return async (dispatch) => {
+      // dispatch(setFeedLoading(true))
+      const toastId = toast.loading("Loading...")
+      const data = {"id":`${id}`};
+      try {
+        const response = await apiConnector(
+          "POST",
+          GET_SINGLE_POST_API,
+          data,
+          {
+            Authorization: `Bearer ${token}`,
+          }
+        );          
+        console.log("SINGLE POST API RESPONSE............", response);
+
+        // if (!res?.data?.success) {
+        //   throw new Error("Could Not Fetch feed post")
+        // }
+       
+        toast.dismiss(toastId);
+        return response;
+        
+      } 
+      catch (error) {
+        console.log("fetch post API ERROR............", error)
+        toast.error(error.message)
+        // dispatch(logout)
+      }
+  
+    }
+  }
 
 
 export function deletePost (data, token) {

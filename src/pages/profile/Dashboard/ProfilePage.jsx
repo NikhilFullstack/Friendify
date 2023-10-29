@@ -1,33 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetails } from "../../../services/operations/profileAPI"
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '../../../assets/css/profilepage.css'
 import { LoaderIcon, toast } from 'react-hot-toast';
-import Button from 'react-bootstrap/Button'
-import { AiFillSetting } from 'react-icons/ai';
 import wall from '../../../assets/logo/back1.jpg'
 import { IoArrowBackCircle } from 'react-icons/io5'
 import { FaCommentAlt } from 'react-icons/fa';
 
 
 function ProfilePage() {
-  const { token, signupData } = useSelector((state) => state.auth)
+  const { token } = useSelector((state) => state.auth)
     const [showComment, setShowComment] = useState(false);
-    const [likes,setLikes] = useState(0);
+    // const [likes,setLikes] = useState(0);
     const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [Length, setLength] = useState(null);
   const [data, setData] = useState(null);
   const {id}=useParams();
   useEffect(() => {
     async function fetchData() {
       try {
-        // console.log("token:", token);
-
-        // const Id = localStorage.getItem("id").split('"')[1];
-        // console.log("ProfilePg", Id)
-        // const id = { "id": Id };
+       
         if(!id){
           const Id = localStorage.getItem("id").split('"')[1];
           dispatch(getUserDetails(token,Id)).then((res) => {

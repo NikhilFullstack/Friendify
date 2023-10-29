@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import HomePage from './HomePage'
 import Home from '../profile/FeedPage/Home'
 import logo from '../../assets/logo/F.png'
-import { authz, logout } from '../../services/operations/authAPI';
+import { logout } from '../../services/operations/authAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setSearchData } from '../../slices/searchSlice';

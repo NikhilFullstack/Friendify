@@ -1,10 +1,8 @@
 import { useState } from "react"
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
-import {SiGnuprivacyguard} from "react-icons/si"
+import {FcGoogle} from "react-icons/fc"
 import { login } from "../../services/operations/authAPI"
-
 function LoginForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -13,7 +11,6 @@ function LoginForm() {
     password: "",
   })
 
-  const [showPassword, setShowPassword] = useState(false)
 
   const { email, password } = formData
 
@@ -29,21 +26,81 @@ function LoginForm() {
     dispatch(login(email, password, navigate))
   }
 
+  
   return (
-    <div className="p-3 gap-5 rounded-lg md:p-8 w-[90vw] flex flex-col mt-10 md:mt-20 justify-center items-center ml-8 md:max-w-[25%]  text-sm
-     z-10 border-2 border-white shadow-white shadow-xl ">
-      
-      <div className="relative text-white gap-2 text-center leading-6">
-      <h1 className="text-white text-xl">Login Here </h1>
-      <h2 className="my-2 py-4 text-yellow-400">Mail: Gup7nik@gmail.com</h2>
-      <h2 className="py-1 text-green-400">Psd<sup>*</sup> : 111</h2>
+    <div className="max-h-screen">
+      <section class="border-red-500 bg-gray-200 min-h-screen flex items-center justify-center">
+    <div class="bg-gray-100 p-5 flex rounded-2xl shadow-lg max-w-3xl">
+      <div class="md:w-1/2 px-5">
+        <h2 class="text-2xl font-bold text-[#002D74]">Login</h2>
+        <p class="text-sm mt-4 text-[#002D74]">If you have an account, please login</p>
+        <form class="mt-6" onSubmit={handleOnSubmit}>
+          <div>
+            <label class="block text-gray-700">Email Address</label>
+            <input 
+            type="email" 
+            name="email"
+            value={email}
+            onChange={handleOnChange}
+            placeholder="Enter Email Address" 
+            class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required/>
+          </div>
+
+          <div class="mt-4">
+            <label class="block text-gray-700">Password</label>
+            <input 
+            type="password" 
+            name="password"
+            value={password}
+            onChange={handleOnChange}
+            placeholder="Enter Password" 
+            minlength="3" 
+            class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                  focus:bg-white focus:outline-none" required/>
+          </div>
+
+          <div class="text-right mt-2">
+            <Link to="/forgot-password" class="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700 delay-200">Forgot Password?</Link>
+          </div>
+
+          <button type="submit" class="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
+                px-4 py-3 mt-6">Log In</button>
+        </form>
+
+        <div class="mt-7 grid grid-cols-3 items-center text-gray-500">
+          <hr class="border-gray-500" />
+          <p class="text-center text-sm">OR</p>
+          <hr class="border-gray-500" />
+        </div>
+
+        <button class="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 ">
+          
+          <FcGoogle/>
+          <span class = "ml-4">Login with Google</span>
+        </button>
+
+        <div class="text-sm flex justify-between items-center mt-3">
+          <p>If you don't have an account...</p>
+          <Link to='/signup' class="py-2 px-5 ml-3 bg-white border rounded-xl hover:scale-110 duration-300 border-blue-400  ">Register</Link>
+        </div>
       </div>
-      <form
+
+      <div class="w-1/2 md:block hidden ">
+        <img src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80" class="rounded-2xl" alt="page img"/>
+      </div>
+
+
+                       {/* <div className="h-max px-[5%] flex flex-col justify-center items-center  text-lg lg:pb-[10%] lg:text-xl xl:text-2xl">
+      
+       <div className="h-max w-[74%]  lg:flex">
+       <img className="rounded-full opacity-80" alt="hero" src={friendifyLogo} />
+     </div>
+       <form
       onSubmit={handleOnSubmit}
-      className="mt-6 flex w-fit flex-col gap-y-4"
+      className="mt-3 flex flex-col gap-y-4 h-full w-10/12"
     >
-      <label className="w-full">
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] lg:hover:scale-95 delay-200 text-gray-50">
+      <label className="w-10/12 h-max">
+        <p className="py-2  text-gray-50">
           Email Address <sup className="text-pink-200">*</sup>
         </p>
         <input
@@ -56,11 +113,11 @@ function LoginForm() {
           style={{
             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
           }}
-          className="w-full rounded-[0.5rem] bg-gray-800 p-[12px] text-gray-50 "
+          className="w-[85%] rounded-[0.5rem] bg-gray-800 p-[12px] text-gray-50 "
         />
       </label>
-      <label className="relative">
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] lg:hover:scale-95 delay-200 text-gray-50">
+      <label className="relative py-4 w-10/12 h-max">
+        <p className="py-2  text-gray-50">
           Password <sup className="text-pink-200">*</sup>
         </p>
         <input
@@ -93,18 +150,22 @@ function LoginForm() {
       </label>
       <button
         type="submit"
-        className="mt-6 lg:hover:scale-95 delay-200 rounded-[8px] hover:font-bold hover:bg-green-600 bg-yellow-50 py-[8px] px-[12px] font-medium text-gray-900"
+        className="mt-6  lg:hover:scale-95 delay-200 rounded-[8px] hover:font-bold hover:bg-green-600 bg-yellow-50 py-[8px] px-[12px] font-medium text-gray-900"
       >
         Sign In
       </button>
      
     </form>
-    <div className="mt-2 w-fit text-white flex gap-20">New User? 
+    <div className="mt-2 w-fit text-white flex gap-20">New User-->
     <Link to='/signup' className="flex  hover:text-green-600 lg:text-white 
     border-2 lg:border-0 rounded-lg 
     lg:rounded-none p-1 lg:p-0 border-yellow-400 lg:border-none
      hover:font-semibold lg:hover:scale-95 delay-200 text-white">Sign Up 
     <SiGnuprivacyguard className="translate-y-1 lg:hover:scale-95 delay-200"/> </Link></div>
+    </div> */}
+    
+    </div>
+  </section>
     </div>
     
   )
