@@ -9,6 +9,7 @@ import { setSearchData } from '../../slices/searchSlice';
 import { searchUser } from '../../services/operations/profileAPI';
 function DefaultPage() {
   const [flag, setFlag] = useState(false);
+  const id = localStorage.getItem("id").split('"')[1];
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showSearch,setShowSearch] = useState(false);
@@ -92,10 +93,10 @@ function DefaultPage() {
                         <a href="#" className="block py-2 pl-3 pr-4  rounded hover:bg-gray-100  xl:border-0  xl:p-0 text-white xl:hover:text-blue-500  hover:text-white xl:hover:bg-transparent">Explore</a>
                       </li>
                       <li>
-                        <a href="/createPost" className="block py-2 pl-3 pr-4  rounded text-white   hover:text-white ">Create</a>
+                        <a href="/" className="block py-2 pl-3 pr-4  rounded text-white   hover:text-white ">Create</a>
                       </li>
                       <li>
-                        <a href="/dashboard/my-profile" className="block py-2 pl-3 pr-4  rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-blue-700 xl:p-0 text-white   hover:text-white ">Profile</a>
+                        <a href={`/profile/${id}`} className="block py-2 pl-3 pr-4  rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-blue-700 xl:p-0 text-white   hover:text-white ">Profile</a>
                       </li>
                       <li>
                         <a href="#" className="block py-2 pl-3 pr-4  rounded  xl:border-0 xl:hover:text-blue-700 xl:p-0 text-white  hover:bg-gray-700 hover:text-white xl:hover:bg-transparent"
