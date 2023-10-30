@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:4000"
+const BASE_URL = "https://mediaproject.onrender.com"
 
 // AUTH ENDPOINTS
 export const endpoints = {
