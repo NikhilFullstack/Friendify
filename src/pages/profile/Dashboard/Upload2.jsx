@@ -54,7 +54,7 @@ const Upload2 = () => {
     return (
         <div className="mt-[133px]  PostShare w-full relative justify-center items-center  px-3  min-h-max
          rounded-xl p-2 flex text-slate-100 border-gray-100  bg-gray-400 lg:mt-10">
-            <form className="text-3xl w-full flex" onSubmit={onSubmit}>
+            <form className="text-3xl w-full flex flex-col md:flex-row" onSubmit={onSubmit}>
                 
                 <Upload
                     name="media"
