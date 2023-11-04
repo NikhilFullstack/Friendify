@@ -87,6 +87,11 @@ export function authz(token){
       dispatch(setLoading(true))
       const toastId = toast.loading("Loading...")
       let result='';
+      if(token === undefined){
+      dispatch(setLoading(false))
+      toast.dismiss(toastId)
+      
+      }
       try {
         const response = await apiConnector(
           "GET",
@@ -105,7 +110,7 @@ export function authz(token){
         toast.error(error.message)
         dispatch(logout)
       }
-  
+      dispatch(setLoading(false))
       toast.dismiss(toastId)
       return result;
     }
