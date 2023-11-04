@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import HomePage from './HomePage'
 import Home from '../profile/FeedPage/Home'
 import logo from '../../assets/logo/F.png'
-import { logout } from '../../services/operations/authAPI';
+import { authz, logout } from '../../services/operations/authAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setSearchData } from '../../slices/searchSlice';
 import { searchUser } from '../../services/operations/profileAPI';
 function DefaultPage() {
   const [flag, setFlag] = useState(false);
-  const id = localStorage.getItem("id").split('"')[1];
+  const id = localStorage.getItem("id") != null ? localStorage.getItem("id").split('"')[1] : '';
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showSearch,setShowSearch] = useState(false);
@@ -44,6 +44,23 @@ function DefaultPage() {
     seArch();
 
   }
+  useEffect(()=> {
+    async function homePage(){
+      try {
+        console.log("token:", token);
+        await dispatch(authz(token)).then((res) => {
+          console.log("rees", res, "resposne has been recived");
+
+        });
+
+      }
+      catch (err) {
+        console.log("error in Authz", err, err.message);
+        dispatch(logout(navigate))
+      }
+    }
+    homePage();
+  },[]);
   
   return (
     <div>

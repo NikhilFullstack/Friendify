@@ -87,32 +87,34 @@ export function authz(token){
       dispatch(setLoading(true))
       const toastId = toast.loading("Loading...")
       let result='';
-      if(token === undefined){
+      if(token === undefined || token === null){
       dispatch(setLoading(false))
       toast.dismiss(toastId)
-      
       }
-      try {
-        const response = await apiConnector(
-          "GET",
-          AUTH_API,
-          null,
-          {
-            Authorization: `Bearer ${token}`,
+      else{
+        try {
+          const response = await apiConnector(
+            "GET",
+            AUTH_API,
+            null,
+            {
+              Authorization: `Bearer ${token}`,
+            }
+          )
+          console.log("Authz API RESPONSE............", response)
+          if (!response?.data?.success) {
+            dispatch(logout)      
+            throw new Error("Login Time Up Signin Again")
           }
-        )
-        console.log("Authz API RESPONSE............", response)
-        if (!response?.data?.success) {
-          throw new Error("Login Time Up Signin Again")
+        } catch (error) {
+          console.log("Authz user Api error............", error)
+          toast.error(error.message)
+          dispatch(logout)
         }
-      } catch (error) {
-        console.log("Authz user Api error............", error)
-        toast.error(error.message)
-        dispatch(logout)
-      }
-      dispatch(setLoading(false))
+        dispatch(setLoading(false))
       toast.dismiss(toastId)
       return result;
+      }
     }
   }
 

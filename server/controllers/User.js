@@ -8,6 +8,12 @@ exports.getUserProfile = async (req, res) => {
     try {
         const id = req.body.id || req.user.id;
         // console.log("id:", id);
+        const userFound = await User.findOne({_id:id});
+        if(!userFound){
+            return res.status(403).json({
+                success: false,
+                message: "user Not Found",
+            })}
         const userData = await User.findById(id).populate({
             path: 'post',
             populate: {

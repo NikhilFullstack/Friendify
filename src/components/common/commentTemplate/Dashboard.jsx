@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Logo from '../../../assets/logo/F.png'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AiFillHome, AiFillBell, AiOutlineAppstoreAdd } from 'react-icons/ai'
 import { FaPeopleLine, FaQuora } from 'react-icons/fa6'
 import { FcGoogle, FcStatistics } from 'react-icons/fc'
@@ -20,6 +20,7 @@ function Dashboard() {
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
     const [date, setDate] = useState(null);
+    const navigate = useNavigate();
     useEffect(() => {
         async function fetchData() {
             try {
@@ -30,14 +31,14 @@ function Dashboard() {
                 // const id = { "id": Id };
                 if (!id) {
                     const Id = localStorage.getItem("id").split('"')[1];
-                    dispatch(getUserDetails(token, Id)).then((res) => {
+                    dispatch(getUserDetails(token, Id, navigate)).then((res) => {
                         console.log("ros", res, "reweer");
                         setPost(res.data.post)
 
                     });
                 }
                 else {
-                    dispatch(getUserDetails(token, id)).then((res) => {
+                    dispatch(getUserDetails(token, id, navigate)).then((res) => {
                         console.log("ros", res.data.post, "reweer");
                         setPost(res.data.post)
 
@@ -64,7 +65,7 @@ function Dashboard() {
     async function postComment(e) {
         console.log("createCommentToken", token);
         await dispatch(createComment({ postId: post._id, caption: comment }, token));
-        await dispatch(getUserDetails(token, id));
+        await dispatch(getUserDetails(token, id, navigate));
     }
 
     const MONTH = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

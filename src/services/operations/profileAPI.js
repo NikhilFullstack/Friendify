@@ -5,7 +5,6 @@ import { profileEndpoints } from "../apis"
 import { logout } from "./authAPI"
 import { setSearchData, setSearchLoading } from "../../slices/searchSlice"
 import { setAllUser, setAllUserLoading } from "../../slices/allUserSlice"
-
 const { GET_USER_DETAILS_API,
   GET_ALL_USER_PRESENT_API,
   // DELETE_USER_API,
@@ -13,12 +12,11 @@ const { GET_USER_DETAILS_API,
   // UPDATE_PROFILE_PICTURE_API,
   SEARCH_USER_API } = profileEndpoints;
   
-export function getUserDetails(token,id) {
+export function getUserDetails(token,id,navigate) {
   
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     try {
-      console.log("12",token,GET_USER_DETAILS_API,{"id":"64b40546413989c923d914cd"})
       const response = await apiConnector(
         "POST", 
         GET_USER_DETAILS_API, 
@@ -31,8 +29,10 @@ export function getUserDetails(token,id) {
 
       return response;
     } catch (error) {
+      toast.dismiss(toastId)
       console.log("GET_USER_DETAILS API ERROR............", error)
-      toast.error("Could Not Get User Details");
+      toast.error("Could Not fetch0 User Details");
+      navigate('/');
       throw error;
     }
 
