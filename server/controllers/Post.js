@@ -156,6 +156,12 @@ exports.getSinglePost = async (req,res)=>{
           message:'PostId Missing',
       })
       }
+      const postFound = await Post.findOne({_id:id});
+        if(!postFound){
+            return res.status(403).json({
+                success: false,
+                message: "Post Not Found",
+            })}
       const posts = await Post.findById({_id:id}).populate(
           {
               path:"like",

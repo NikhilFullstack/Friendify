@@ -103,17 +103,19 @@ export function authz(token){
           )
           console.log("Authz API RESPONSE............", response)
           if (!response?.data?.success) {
+            toast.dismiss(toastId)
             dispatch(logout)      
             throw new Error("Login Time Up Signin Again")
           }
         } catch (error) {
+          toast.dismiss(toastId);
           console.log("Authz user Api error............", error)
           toast.error(error.message)
           dispatch(logout)
         }
         dispatch(setLoading(false))
-      toast.dismiss(toastId)
-      return result;
+        toast.dismiss(toastId)
+        return result;
       }
     }
   }

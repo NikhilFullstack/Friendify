@@ -25,7 +25,7 @@ export function getUserDetails(token,id,navigate) {
         Authorization: `Bearer ${token}`,
       });
       console.log("GET_USER_Profile API RESPONSE............", response);
-    toast.dismiss(toastId);
+      toast.dismiss(toastId);
 
       return response;
     } catch (error) {

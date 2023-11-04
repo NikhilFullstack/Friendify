@@ -70,11 +70,16 @@ return async (dispatch) => {
 }
 
 
-export function getSinglePost(token,id){
+export function getSinglePost(token, id, navigate){
   return async (dispatch) => {
       // dispatch(setFeedLoading(true))
       const toastId = toast.loading("Loading...")
       const data = {"id":`${id}`};
+      if(id === undefined || id === null ){
+        toast.dismiss(toastId);
+        toast.error('Something went Wrong');
+        navigate('/');
+      }
       try {
         const response = await apiConnector(
           "POST",
@@ -95,9 +100,10 @@ export function getSinglePost(token,id){
         
       } 
       catch (error) {
+        toast.dismiss(toastId);
         console.log("fetch post API ERROR............", error)
         toast.error(error.message)
-        // dispatch(logout)
+        navigate('/');
       }
   
     }
