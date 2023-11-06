@@ -120,8 +120,7 @@ export function authz(token, navigate){
           console.log("Authz API RESPONSE............", response)
           if (!response?.data?.success) {
             toast.dismiss(toastId)
-            await dispatch(logout)   
-            navigate("/login")
+            await dispatch(logout(navigate))   
 
             throw new Error("Login Time Up Signin Again")
           }
@@ -129,9 +128,7 @@ export function authz(token, navigate){
           toast.dismiss(toastId);
           console.log("Authz user Api error............", error)
           toast.error(error.message)
-          await dispatch(logout)
-          navigate("/login")
-
+          await logout(navigate);
         }
         dispatch(setLoading(false))
         toast.dismiss(toastId)
