@@ -128,7 +128,7 @@ export function authz(token, navigate){
           toast.dismiss(toastId);
           console.log("Authz user Api error............", error)
           toast.error(error.message)
-          await logout(navigate);
+          await dispatch(logout(navigate))   
         }
         dispatch(setLoading(false))
         toast.dismiss(toastId)
