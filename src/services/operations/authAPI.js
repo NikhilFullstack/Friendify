@@ -14,6 +14,22 @@ const {
   AUTH_API,
 } = endpoints
 
+export function logout(navigate) {
+  return async (dispatch) => {
+    await dispatch(setLoading(true));
+    await dispatch(setToken(null))
+    await localStorage.removeItem("token")
+    await localStorage.removeItem("image")
+    await localStorage.removeItem("firstName")
+    await localStorage.removeItem("userId")
+    await localStorage.removeItem("lastName")
+    await toast.success("Logged Out")
+    await navigate("/login")
+    await dispatch(setLoading(false));
+
+  }
+}
+
 export function sendOtp(email, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
@@ -82,7 +98,7 @@ export function signUp(
   }
 }
 
-export function authz(token){
+export function authz(token, navigate){
   return async (dispatch) => {
       dispatch(setLoading(true))
       const toastId = toast.loading("Loading...")
@@ -104,7 +120,9 @@ export function authz(token){
           console.log("Authz API RESPONSE............", response)
           if (!response?.data?.success) {
             toast.dismiss(toastId)
-            dispatch(logout)      
+            dispatch(logout)   
+            navigate("/login")
+
             throw new Error("Login Time Up Signin Again")
           }
         } catch (error) {
@@ -112,6 +130,8 @@ export function authz(token){
           console.log("Authz user Api error............", error)
           toast.error(error.message)
           dispatch(logout)
+          navigate("/login")
+
         }
         dispatch(setLoading(false))
         toast.dismiss(toastId)
@@ -157,21 +177,7 @@ export function login(email, password, navigate) {
   }
 }
 
-export function logout(navigate) {
-  return async (dispatch) => {
-    await dispatch(setLoading(true));
-    await dispatch(setToken(null))
-    await localStorage.removeItem("token")
-    await localStorage.removeItem("image")
-    await localStorage.removeItem("firstName")
-    await localStorage.removeItem("userId")
-    await localStorage.removeItem("lastName")
-    await toast.success("Logged Out")
-    await navigate("/login")
-    await dispatch(setLoading(false));
 
-  }
-}
 
 
 

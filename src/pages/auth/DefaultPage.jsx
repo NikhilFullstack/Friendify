@@ -48,7 +48,7 @@ function DefaultPage() {
     async function homePage(){
       try {
         console.log("token:", token);
-        await dispatch(authz(token)).then((res) => {
+        await dispatch(authz(token, navigate)).then((res) => {
           console.log("rees", res, "resposne has been recived");
 
         });

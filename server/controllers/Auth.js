@@ -227,13 +227,13 @@ exports.login = async (req,res)=>{
                 id:existedEmail._id,
             };
             const token = jwt.sign(payload,process.env.JWT_SECRET,{
-                expiresIn:"2592000000",
+                expiresIn:"15000",
             });
             existedEmail.token = token;
             existedEmail.password = undefined;
             // create cookie and send response
             const options = {
-                expires: new Date(Date.now()+2592000000),
+                expires: new Date(Date.now()+15000),
                 httpOnly:true,
             };
             // existedEmail.save();
