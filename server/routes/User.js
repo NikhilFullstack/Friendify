@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {login,sendOTP,signup} = require('../controllers/Auth');
 const {resetPassword,resetPasswordToken} = require('../controllers/ResetPassword');
-const {auth, authz} = require('../middleware/Auth');
+const { authz} = require('../middleware/Auth');
 
 
 // Routes for Login, Signup, and Authentication
