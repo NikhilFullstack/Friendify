@@ -4,7 +4,6 @@ import { setLoading, setSignupData, setToken } from "../../slices/authSlice"
 import { apiConnector } from "../apiconnector"
 import { endpoints } from "../apis"
 
-
 const {
   SENDOTP_API,
   SIGNUP_API,
@@ -13,6 +12,22 @@ const {
   RESETPASSWORD_API,
   AUTH_API,
 } = endpoints
+
+export function logout(navigate) {
+  return async (dispatch) => {
+    await dispatch(setLoading(true));
+    await dispatch(setToken(null))
+    await localStorage.removeItem("token")
+    await localStorage.removeItem("image")
+    await localStorage.removeItem("firstName")
+    await localStorage.removeItem("userId")
+    await localStorage.removeItem("lastName")
+    await toast.success("Logged Out")
+    await navigate("/login")
+    await dispatch(setLoading(false));
+
+  }
+}
 
 export function sendOtp(email, navigate) {
   return async (dispatch) => {
@@ -82,32 +97,43 @@ export function signUp(
   }
 }
 
-export function authz(token){
+export function authz(token, navigate){
   return async (dispatch) => {
       dispatch(setLoading(true))
       const toastId = toast.loading("Loading...")
       let result='';
-      try {
-        const response = await apiConnector(
-          "GET",
-          AUTH_API,
-          null,
-          {
-            Authorization: `Bearer ${token}`,
-          }
-        )
-        console.log("Authz API RESPONSE............", response)
-        if (!response?.data?.success) {
-          throw new Error("Login Time Up Signin Again")
-        }
-      } catch (error) {
-        console.log("Authz user Api error............", error)
-        toast.error(error.message)
-        dispatch(logout)
-      }
-  
+      if(token === undefined || token === null){
+      dispatch(setLoading(false))
       toast.dismiss(toastId)
-      return result;
+      }
+      else{
+        try {
+          const response = await apiConnector(
+            "GET",
+            AUTH_API,
+            null,
+            {
+              Authorization: `Bearer ${token}`,
+            }
+          )
+          console.log("Authz API RESPONSE............", response)
+          if (!response?.data?.success) {
+            toast.dismiss(toastId)
+            // await dispatch(logout(navigate))   
+
+            throw new Error("Login Time Up Signin Again")
+          }
+        } catch (error) {
+          toast.dismiss(toastId);
+          console.log("Authz user Api error............", error)
+          toast.error(error.message)
+          localStorage.removeItem("token");
+          // await dispatch(logout(navigate))   
+        }
+        dispatch(setLoading(false))
+        toast.dismiss(toastId)
+        return result;
+      }
     }
   }
 
@@ -148,21 +174,7 @@ export function login(email, password, navigate) {
   }
 }
 
-export function logout(navigate) {
-  return async (dispatch) => {
-    await dispatch(setLoading(true));
-    await dispatch(setToken(null))
-    await localStorage.removeItem("token")
-    await localStorage.removeItem("image")
-    await localStorage.removeItem("firstName")
-    await localStorage.removeItem("userId")
-    await localStorage.removeItem("lastName")
-    await toast.success("Logged Out")
-    await navigate("/login")
-    await dispatch(setLoading(false));
 
-  }
-}
 
 
 

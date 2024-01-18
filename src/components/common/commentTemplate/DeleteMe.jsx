@@ -18,14 +18,14 @@ function DeleteMe() {
     async function postComment(e) {
         console.log("createCommentToken", token);
         await dispatch(createComment({ postId: id, caption: comment }, token));
-        await dispatch(getSinglePost(token,id));
+        await dispatch(getSinglePost(token,id, navigate));
       }
     useEffect(()=> {
         console.log("idd",id,token);
         async function fetchData() {
             try{
                 if(id){
-                     await dispatch(getSinglePost(token,id)).then((res) =>
+                     await dispatch(getSinglePost(token,id, navigate)).then((res) =>
                      {
                         console.log("result", res);
                         setPost(res?.data?.posts)

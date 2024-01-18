@@ -87,8 +87,9 @@ function PostCard(props) {
                   src="https://images.pexels.com/photos/3682153/pexels-photo-3682153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" /> */}
                 {post?.media.map((a, index) => {
                   return <div className="flex h-full w-full relative " key={index}>
+                    
                     <img className="h-max w-[19rem] sm:w-[29rem] md:w-[35rem] lg:w-[40rem] xl:w-[47rem] rounded-lg bg-cover"
-                      src={a} loading='lazy' alt='card-image' />
+                      src={a = a.split('.')[3]=== 'avif' ? a.split('.')[0] + '.' + a.split('.')[1] + '.' + a.split('.')[2] + '.webp' : a } loading='lazy' alt='card-image' />
                   </div>
                 })}
               </a>

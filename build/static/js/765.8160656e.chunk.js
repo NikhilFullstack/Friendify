@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkfriendify=self.webpackChunkfriendify||[]).push([[765],{9765:function(a,e,s){s.r(e);s(2791);var i=s(184);e.default=function(a){var e=a.Src,s=a.ClassName;return(0,i.jsx)("div",{children:(0,i.jsx)("img",{src:e,className:s,alt:"lazyloading"})})}}}]);
+//# sourceMappingURL=765.8160656e.chunk.js.map
