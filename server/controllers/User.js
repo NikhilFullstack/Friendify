@@ -14,10 +14,11 @@ exports.getUserProfile = async (req, res) => {
                 success: false,
                 message: "user Not Found",
             })}
-        const userData = await User.findById(id).populate({
-            path: 'post',
-            populate: {
-                path: 'userId',
+        const userData = await User.findOne({_id:id})
+        .populate({
+            path:'post',
+            populate:{
+                path:'userId',
             }
         }).populate({
             path: 'post',

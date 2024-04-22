@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createComment } from '../../services/operations/commentAPI';
-
+import { setFirstName } from '../../slices/profileSlice';
 
 import { getAllPost } from '../../services/operations/PostAPI';
 
 function PostCard(props) {
   const { post, key } = props;
+  const {firstName, lastName, image } = props;
   const [comment, setComment] = useState('');
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
@@ -17,7 +18,6 @@ function PostCard(props) {
 
   const { token, loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
 
   // Function to handle the "Enter" key press
 
@@ -50,19 +50,17 @@ function PostCard(props) {
       
       {loading ? (<></>) : (
         <div className="flex flex-col h-max w-[19rem] sm:w-[29rem] md:w-[35rem] lg:w-[40rem] xl:w-[44.5rem] justify-center " id={props.post._id}>
-
-          
-          
+          {/* {console.log("main",props)} */}
 
           <article className="mb-4 break-inside p-6 rounded-xl  bg-white dark:bg-slate-800 flex flex-col bg-clip-border h-max">
             <div className="flex pb-6 items-center justify-between">
               <div className="flex">
                 <a className="inline-block mr-4" href={`/profile/${post?.userId?._id}`}>
-                  <img className="rounded-full max-w-none w-14 h-14" src={post?.userId?.image} />
+                  <img className="rounded-full max-w-none w-14 h-14" src={post?.userId?.image ?? image} />
                 </a>
                 <div className="flex flex-col">
                   <div className="flex items-center">
-                    <a className="inline-block text-lg font-bold mr-2" href={`/profile/${post?.userId?._id}`}>{post?.userId?.firstName} {post?.userId?.lastName}</a>
+                    <a className="inline-block text-lg font-bold mr-2" href={`/profile/${post?.userId?._id}`}>{post?.userId?.firstName ?? firstName} {post?.userId?.lastName ?? lastName}</a>
                     <span>
                       <svg className="fill-blue-500 dark:fill-slate-50 w-5 h-5" viewBox="0 0 24 24">
                         <path

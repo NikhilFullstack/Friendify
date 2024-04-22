@@ -59,8 +59,11 @@ function Post() {
               {
                 data?.posts.slice().reverse()
                   .map((Post, index) => (
-                    <Suspense fallback={<div className=''></div>}><PostCard post={Post} key={index} /></Suspense>
-
+                    <Suspense fallback={<div className=''></div>}>
+                      <PostCard post={Post} key={index} />
+                      {/* {console.log("original",Post)} */}
+                      </Suspense>
+                    
 
                   ))
               }
