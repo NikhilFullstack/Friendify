@@ -16,7 +16,7 @@ function Home() {
 },[]);
 
   return (
-    <div className='flex h-screen w-screen mt-[88px] xl:mt-0 bg-black'>
+    <div className='flex h-screen w-screen mt-[88px] xl:mt-0 bg-[rgb(241,245,249)] text-black'>
       
       
       <div className='relative w-[30%] xl:block hidden '> 
